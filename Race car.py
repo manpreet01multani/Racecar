@@ -102,8 +102,8 @@ def game_loop():
             thing_starty = -600
             thing_startx = random.randrange(0,display_width)
             dodged += 1
-            thing_speed += 1
-            thing_width += (dodged * 1.2)
+            #thing_speed += 1
+            #thing_width += (dodged * 1.2)
             print(dodged)
 
         if(y < thing_starty+thing_height):
