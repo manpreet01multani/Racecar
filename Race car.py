@@ -3,11 +3,10 @@
 import pygame
 import time
 import random
-
 pygame.init()
 #Convert mp3 to .wav and enjoy songs yay!! :D
 
-pygame.mixer.music.load('bouncey.wav')
+pygame.mixer.music.load('Race_Car.wav')
 pygame.mixer.music.play(-1)
 
 display_width = 800
@@ -15,14 +14,15 @@ display_height = 600
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('A bit Racey')
-carImg = pygame.image.load('racecar.png')
+carImg = pygame.image.load('car1.png')
 
 black = (0,0,0)
 white = (255,255,255)
+blue=(0,0,255)
 
 clock = pygame.time.Clock()
 
-racecar_width=73
+racecar_width=72
 
 def things_dodged(count):
     font = pygame.font.SysFont(None, 25)
@@ -33,16 +33,16 @@ def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
 
 def text_objects(text, font):
-    textSurface = font.render(text, True, black)
+    textSurface = font.render(text, True, blue)
     return textSurface, textSurface.get_rect()
 
 def message_display(text):
-    largeText = pygame.font.Font('freesansbold.ttf',115)
+    largeText = pygame.font.Font('freesansbold.ttf',50)
     TextSurf, TextRect = text_objects(text, largeText)
     TextRect.center = ((display_width/2),(display_height/2))
     gameDisplay.blit(TextSurf, TextRect)
     pygame.display.update()
-    # time.sleep(2)
+    time.sleep(1)
     game_loop()
 
 def crash():
@@ -53,15 +53,15 @@ def car(x,y):
 
 def game_loop():
     x = (display_width * 0.45)
-    y = (display_height * 0.8)
+    y = (display_height * 0.75)
     x_change = 0
     y_change = 0
     gameExit = False
     thing_startx = random.randrange(0, display_width)
     thing_starty = -600
     thing_speed = 7
-    thing_width = 100
-    thing_height = 100
+    thing_width =70
+    thing_height =70
     dodged=0
     while not gameExit:
 
@@ -105,8 +105,6 @@ def game_loop():
             thing_speed += 1
             thing_width += (dodged * 1.2)
             print(dodged)
-
-
 
         if(y < thing_starty+thing_height):
             # print("Crossed vertically")
