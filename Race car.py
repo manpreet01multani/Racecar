@@ -62,8 +62,10 @@ def things_dodged(count):
     text = font.render("Dodged: "+str(count), True, black)
     gameDisplay.blit(text,(0,0))
 
+##############
 def things(thingx, thingy, thingw, thingh, color):
     pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
+##############
 
 def text_objects(text, font):
     textSurface = font.render(text, True, red)
@@ -103,7 +105,6 @@ def game_intro():
 
         button("Play",150,450,100,50,green,bright_green,game_loop)
         button("Quit", 550, 450, 100, 50, bright_blue, blue,quitgame)
-        button("Score",356,528,100,50,light_pink,pink,things_dodged)
 
         pygame.display.update()
         clock.tick(15)
@@ -115,12 +116,15 @@ def game_loop():
     x_change = 0
     y_change = 0
     gameExit = False
+    ####################
     thing_startx = random.randrange(0, display_width)
     thing_starty = -600
     thing_speed = 7
     thing_width =70
     thing_height =70
     dodged=0
+
+   #####################
     while not gameExit:
 
         for event in pygame.event.get():
@@ -128,6 +132,7 @@ def game_loop():
                 # gameExit = True
                 pygame.quit()
                 quit()
+        ############################
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     x_change = -5
@@ -141,17 +146,22 @@ def game_loop():
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                     x_change = 0
                     y_change = 0
+        ################################
 
             #print(event)
+
+        ##
         x += x_change
         y += y_change
-
+        ##
         gameDisplay.fill(white)
 
+        ###################
         things(thing_startx, thing_starty, thing_width, thing_height, black)
         thing_starty += thing_speed
         things_dodged(dodged)
         car(x, y)
+        ###################
 
         if((x < 0) or (x > display_width - racecar_width)):
             # gameExit = True
@@ -164,15 +174,15 @@ def game_loop():
             #thing_width += (dodged * 1.2)
             print(dodged)
 
-
+        ######
         if(y < thing_starty+thing_height):
             # print("Crossed vertically")
             if(x > thing_startx and x < thing_startx+thing_width or x+racecar_width >thing_startx and x+racecar_width < thing_startx+thing_width ):
                 # print("Crossed horizontally")
                 crash()
+        #######
 
         pygame.display.update()
-
         clock.tick(60)
 
 game_intro()
